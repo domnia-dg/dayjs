@@ -124,11 +124,15 @@ class Dayjs {
   }
 
   isAfter(that, units) {
-    return dayjs(that) < this.startOf(units)
+    return (units === undefined || units === 'ms') ?
+      dayjs(that).valueOf() < this.valueOf() :
+      dayjs(that) < this.startOf(units)
   }
 
   isBefore(that, units) {
-    return this.endOf(units) < dayjs(that)
+    return (units === undefined || units === 'ms') ?
+      this.valueOf() < dayjs(that).valueOf() :
+      this.endOf(units) < dayjs(that)
   }
 
   $g(input, get, set) {
